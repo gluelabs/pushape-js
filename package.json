@@ -1,0 +1,25 @@
+{
+  "name": "pushape-js",
+  "version": "0.0.0",
+  "description": "Library to integrate Pushape back end in a website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gluelabs/pushape-js.git"
+  },
+  "keywords": [
+    "pushape",
+    "gluelabs",
+    "notification",
+    "push"
+  ],
+  "author": "Glue Labs S.r.l.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gluelabs/pushape-js/issues"
+  },
+  "homepage": "https://github.com/gluelabs/pushape-js#readme"
+}
