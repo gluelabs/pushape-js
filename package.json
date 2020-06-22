@@ -4,7 +4,9 @@
   "description": "Library to integrate Pushape back end in a website",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "commit": "git-cz",
+    "changelog": "node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md && git commit -m 'docs(changelog): add new log'"
   },
   "repository": {
     "type": "git",
@@ -21,5 +23,28 @@
   "bugs": {
     "url": "https://github.com/gluelabs/pushape-js/issues"
   },
-  "homepage": "https://github.com/gluelabs/pushape-js#readme"
+  "homepage": "https://github.com/gluelabs/pushape-js#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^8.0.0",
+    "@commitlint/config-conventional": "^8.0.0",
+    "commitizen": "^3.1.1",
+    "conventional-changelog-cli": "^2.0.23",
+    "cz-conventional-changelog": "^2.1.0",
+    "husky": "^2.5.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint --edit"
+    }
+  }
 }
