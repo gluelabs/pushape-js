@@ -2,11 +2,15 @@
   "name": "pushape-js",
   "version": "0.0.0",
   "description": "Library to integrate Pushape back end in a website",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build" : "tsc",
     "commit": "git-cz",
-    "changelog": "node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md && git commit -m 'docs(changelog): add new log'"
+    "changelog": "node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md && git commit -m 'docs(changelog): add new log'",
+    "prepare" : "npm run build",
+    "postversion" : "git push && git push --tags"
   },
   "repository": {
     "type": "git",
@@ -30,7 +34,8 @@
     "commitizen": "^3.1.1",
     "conventional-changelog-cli": "^2.0.23",
     "cz-conventional-changelog": "^2.1.0",
-    "husky": "^2.5.0"
+    "husky": "^2.5.0",
+    "typescript": "^3.9.5"
   },
   "config": {
     "commitizen": {
@@ -46,5 +51,6 @@
     "hooks": {
       "commit-msg": "commitlint --edit"
     }
-  }
+  },
+  "files": ["lib/**/*"]
 }
