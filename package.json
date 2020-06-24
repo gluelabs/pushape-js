@@ -61,5 +61,8 @@
   "files": [
     "lib/**/*",
     "_bundles/**/*"
-  ]
+  ],
+  "dependencies": {
+    "firebase": "^7.15.4"
+  }
 }
