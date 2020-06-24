@@ -4,6 +4,7 @@
     "lib": [ "es2015", "dom" ],
     "module": "commonjs",
     "declaration": true,
+    "declarationDir": "./lib",
     "outDir": "./lib",
     "strict": true,
     "allowSyntheticDefaultImports": true

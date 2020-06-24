@@ -6,11 +6,12 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build" : "tsc",
+    "clean": "shx rm -rf _bundles lib lib-esm",
+    "build": "npm run clean && tsc && tsc -m es6 --outDir lib-esm && webpack",
     "commit": "git-cz",
     "changelog": "node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md && git commit -m 'docs(changelog): add new log'",
-    "prepare" : "npm run build",
-    "postversion" : "git push && git push --tags"
+    "prepare": "npm run build",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
@@ -31,11 +32,16 @@
   "devDependencies": {
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-conventional": "^8.0.0",
+    "awesome-typescript-loader": "^5.2.1",
     "commitizen": "^3.1.1",
     "conventional-changelog-cli": "^2.0.23",
     "cz-conventional-changelog": "^2.1.0",
     "husky": "^2.5.0",
-    "typescript": "^3.9.5"
+    "shx": "^0.3.2",
+    "typescript": "^3.9.5",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
   },
   "config": {
     "commitizen": {
@@ -52,5 +58,8 @@
       "commit-msg": "commitlint --edit"
     }
   },
-  "files": ["lib/**/*"]
+  "files": [
+    "lib/**/*",
+    "_bundles/**/*"
+  ]
 }
