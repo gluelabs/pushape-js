@@ -20,3 +20,9 @@ The project use Angular commit convention:
 This convention is enforce by some git pre-hook.
 
 You could make a traditional commit following the syntax rules or use `npm run commit` that help you to construct the commit message in the right way.
+
+## Reference
+
+- https://marcobotto.com/blog/compiling-and-bundling-typescript-libraries-with-webpack/
+- https://itnext.io/step-by-step-building-and-publishing-an-npm-typescript-package-44fe7164964c
+- https://blog.npmjs.org/post/165769683050/publishing-what-you-mean-to-publish
