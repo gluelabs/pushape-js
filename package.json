@@ -63,6 +63,7 @@
     "_bundles/**/*"
   ],
   "dependencies": {
+    "browser-detect": "^0.2.28",
     "firebase": "^7.15.4"
   }
 }
