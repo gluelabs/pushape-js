@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "shx rm -rf _bundles lib lib-esm",
-    "clean-example": "shx rm example/pushape-js.js example/pushape-js.js.map",
+    "clean-example": "shx rm -f example/pushape-js.js example/pushape-js.js.map",
     "build": "npm run clean && npm run clean-example && tsc && tsc -m es6 --outDir lib-esm && webpack && ./node_modules/.bin/gulp",
     "commit": "git-cz",
     "changelog": "node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md && git commit -m 'docs(changelog): add new log'",
