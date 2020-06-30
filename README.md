@@ -96,8 +96,56 @@ const showMessage = function (payload) {
 
 **Use lib**
 
-- [ ] Show how methods works
-- [ ] Show the steps to do in order to configure it
+Use in Vanilla JS:
+
+In `index.html`:
+
+```HTML
+<html>
+  <body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.2.0/uuidv4.min.js"></script>
+    <script src="./node_modules/pushape-js/pushape-js.js"></script>
+    <script src="index.js"></script>
+  </body>
+  </body>
+</html>
+```
+
+In `index.js`:
+
+```JS
+const firebaseApp = PushapeJS.initializeFirebase({
+  appId: '<appId>',
+  apiKey: '<apiKey>',
+  authDomain: '<authDomain>',
+  projectId: '<firebaseProjectId>',
+  messagingSenderId: '<senderId>',
+});
+
+let registration;
+let token;
+let uuid = uuidv4();
+
+PushapeJS.initializeFirebaseServiveWorker(firebaseApp)
+  .then((r) => {
+    registration = r;
+    return PushapeJS.askForPermissions(firebaseApp, '');
+  })
+  .then((t) => {
+    token = t;
+
+    PushapeJS.initializeSwListeners(registration);
+    PushapeJS.initSimplePushape(
+      {
+        id_app: '',
+        uuid,
+        internal_id: 'test',
+      },
+      token,
+    );
+  });
+```
 
 ### Test notification
 
@@ -130,17 +178,17 @@ The server key is found in the project settings in the Firebase Console under th
 
 ## API
 
-| Function | Context  | Description |   |
-|---|---|---|---|---|
-|`initializeFirebase`|Firebase utils|Initialize firebase app and return it. It requires Firebase's project credentials as show in examples|   |
-|`initializeFirebaseServiveWorker`|Firebase utils|Register service worker in the client and use it in Firebase if supported. Than it allow to listen push event|   |
-|`initializeSwListeners`|Firebase utils|   |   |
-|`showNotification`|Firebase utils|   |   |
-|`askForPermissions`|Permission utils|Check for user permission about notification and return a token to use in `registerApiPushape` function|   |
-|`registerApiPushape`|Pushape API|Subscribe to the Pushape notification center. This allow to receive notifications from Pushape back end|   |
-|`unregisterApiPushape`|Pushape API|Unsubscribe from Pushape notification center|   |
-|`initPushape`|Pushape utils|Wrapper for Firebase initialization process, permssions and Pushape registration. It call each method with in the right sequence|   |
-|`initSimplePushape`|Pushape utils|Wrapper for `registerApiPushape` that provide a platform if not set from the consumer|   |
+| Function                          | Context          | Description                                                                                                                      |     |
+| --------------------------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------- | --- |
+| `initializeFirebase`              | Firebase utils   | Initialize firebase app and return it. It requires Firebase's project credentials as show in examples                            |     |
+| `initializeFirebaseServiveWorker` | Firebase utils   | Register service worker in the client and use it in Firebase if supported. Than it allow to listen push event                    |     |
+| `initializeSwListeners`           | Firebase utils   |                                                                                                                                  |     |
+| `showNotification`                | Firebase utils   |                                                                                                                                  |     |
+| `askForPermissions`               | Permission utils | Check for user permission about notification and return a token to use in `registerApiPushape` function                          |     |
+| `registerApiPushape`              | Pushape API      | Subscribe to the Pushape notification center. This allow to receive notifications from Pushape back end                          |     |
+| `unregisterApiPushape`            | Pushape API      | Unsubscribe from Pushape notification center                                                                                     |     |
+| `initPushape`                     | Pushape utils    | Wrapper for Firebase initialization process, permssions and Pushape registration. It call each method with in the right sequence |     |
+| `initSimplePushape`               | Pushape utils    | Wrapper for `registerApiPushape` that provide a platform if not set from the consumer                                            |     |
 
 ---
 
