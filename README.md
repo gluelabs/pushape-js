@@ -2,6 +2,8 @@
 
 > Project contained the library used to integrate Pushape back end in a website.
 
+In order to use it you need to get Pushape account: https://glue-labs.com/pushape-invio-notifiche-push-ios-android-api-sdk
+
 Browser support: https://caniuse.com/#feat=push-api
 
 ---
