@@ -3500,14 +3500,16 @@ function initializeFirebaseServiveWorker(firebaseApp, pushEventCb, swPathName) {
                     return [4 /*yield*/, navigator.serviceWorker.register(swPathName)];
                 case 2:
                     registration = _a.sent();
-                    if (!app_1.default.messaging.isSupported()) {
-                        throw new Error('[PushapeJS] Firebase messagign not supported');
+                    if (app_1.default.messaging.isSupported()) {
+                        firebaseApp.messaging().useServiceWorker(registration);
+                        registration.addEventListener('push', function (event) {
+                            console.log('[PushapeJS] Event push', event);
+                            pushEventCb(event);
+                        });
                     }
-                    firebaseApp.messaging().useServiceWorker(registration);
-                    registration.addEventListener('push', function (event) {
-                        console.log('[PushapeJS] Event push', event);
-                        pushEventCb(event);
-                    });
+                    else {
+                        console.warn('[PushapeJS] Firebase messagign not supported');
+                    }
                     return [2 /*return*/, registration];
                 case 3:
                     e_1 = _a.sent();
@@ -3648,7 +3650,7 @@ function checkSafariRemotePermission(websiteUrl) {
                         {}, // Data that you choose to send to your server to help you identify the user.
                         function () {
                             // TODO: Why? computeteSafariResponse(e);
-                            return false;
+                            return computeteSafariResponse(permissionData);
                         })];
                 case 1:
                     // This is a new web service URL and its validity is unknown.

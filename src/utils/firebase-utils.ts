@@ -32,17 +32,16 @@ export async function initializeFirebaseServiveWorker(
     try {
       const registration = await navigator.serviceWorker.register(swPathName);
 
-      if (!firebase.messaging.isSupported()) {
-        throw new Error('[PushapeJS] Firebase messagign not supported');
+      if (firebase.messaging.isSupported()) {
+        firebaseApp.messaging().useServiceWorker(registration);
+
+        registration.addEventListener('push', (event) => {
+          console.log('[PushapeJS] Event push', event);
+          pushEventCb(event);
+        });
+      } else {
+        console.warn('[PushapeJS] Firebase messaging not supported');
       }
-
-      firebaseApp.messaging().useServiceWorker(registration);
-
-      registration.addEventListener('push', (event) => {
-        console.log('[PushapeJS] Event push', event);
-
-        pushEventCb(event);
-      });
 
       return registration;
     } catch (e) {
@@ -88,7 +87,7 @@ export function showNotification(registration: ServiceWorkerRegistration, msg: M
     body: notification.body,
     icon: notification.icon,
     badge: notification.badge,
-    vibrate: [100, 50, 100,100, 50, 100,100, 50, 100],
+    vibrate: [100, 50, 100, 100, 50, 100, 100, 50, 100],
     data: {
       click_action: data.click_action
     },

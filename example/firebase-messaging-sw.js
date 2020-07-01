@@ -14,6 +14,7 @@ firebase.initializeApp({
   messagingSenderId: '<senderId>',
 });
 
+if (firebase.messaging.isSupported()) {
 const messaging = firebase.messaging();
 
 /**
@@ -23,6 +24,9 @@ messaging.setBackgroundMessageHandler((ev) => {
   console.log('[PushapeJS - SW] Handling background message', ev);
   showMessage(ev);
 });
+} else {
+  console.warn('[PushapeJS - SW] Firebase messaging does not supported');
+}
 
 self.addEventListener('push', function (event) {
   console.log('[PushapeJS - SW] Receive push event', event);
