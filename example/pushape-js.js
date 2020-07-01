@@ -3508,7 +3508,7 @@ function initializeFirebaseServiveWorker(firebaseApp, pushEventCb, swPathName) {
                         });
                     }
                     else {
-                        console.warn('[PushapeJS] Firebase messagign not supported');
+                        console.warn('[PushapeJS] Firebase messaging not supported');
                     }
                     return [2 /*return*/, registration];
                 case 3:
