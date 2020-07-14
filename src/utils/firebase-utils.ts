@@ -25,7 +25,7 @@ export function initializeFirebase(options: InitFirebaseOptions) {
 
 export async function initializeFirebaseServiveWorker(
   firebaseApp: firebase.app.App,
-  pushEventCb = (_: Event) => undefined,
+  pushEventCb = (_: Event) => {},
   swPathName = 'firebase-messaging-sw.js',
 ) {
   if ('serviceWorker' in navigator) {
@@ -55,9 +55,9 @@ export async function initializeFirebaseServiveWorker(
 
 export function initializeSwListeners(
   registration: ServiceWorkerRegistration,
-  notificationclickEventCb = (_: MessageEvent) => undefined,
+  notificationclickEventCb = (_: MessageEvent) => {},
   /** If set the show notification function not will be triggered */
-  pushapeEventCb?: (_: MessageEvent) => undefined,
+  pushapeEventCb?: (_: MessageEvent) => {},
 ) {
   navigator.serviceWorker.addEventListener('message', (msg: MessageEvent) => {
     if (msg.data.event === 'pushape') {
