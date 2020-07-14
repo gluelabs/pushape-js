@@ -1,12 +1,16 @@
-<a name="0.0.4"></a>
-## 0.0.4 (2020-06-30)
+<a name="0.0.5"></a>
+## 0.0.5 (2020-07-14)
 
 
 ### Bug Fixes
 
 * add branch master for trigger publish on NPM ([91f9e4c](https://github.com/gluelabs/pushape-js/commit/91f9e4c))
 * allow to resolve node_modules in TS build ([7fe5c91](https://github.com/gluelabs/pushape-js/commit/7fe5c91))
+* avoid to return false on check permission ([5d1fece](https://github.com/gluelabs/pushape-js/commit/5d1fece))
+* check messaging support in SW ([80680fc](https://github.com/gluelabs/pushape-js/commit/80680fc))
 * improve lib build tools ([aa11d88](https://github.com/gluelabs/pushape-js/commit/aa11d88))
+* move dependencies into peerDeependecies ([c818571](https://github.com/gluelabs/pushape-js/commit/c818571))
+* wrong return type for event callback in firebase listeners ([0bfdbdc](https://github.com/gluelabs/pushape-js/commit/0bfdbdc))
 
 
 ### Features

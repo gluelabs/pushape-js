@@ -2,6 +2,8 @@
 
 > Project contained the library used to integrate Pushape back end in a website.
 
+In order to use it you need to get Pushape account: https://glue-labs.com/pushape-invio-notifiche-push-ios-android-api-sdk
+
 Browser support: https://caniuse.com/#feat=push-api
 
 ---
@@ -37,15 +39,19 @@ firebase.initializeApp({
   messagingSenderId: '<senderId>',
 });
 
-const messaging = firebase.messaging();
+if (firebase.messaging.isSupported()) {
+  const messaging = firebase.messaging();
 
-/**
- * This will be triggered only if push payload will be missing notification property
- */
-messaging.setBackgroundMessageHandler((ev) => {
-  console.log('[PushapeJS - SW] Handling background message', ev);
-  showMessage(ev);
-});
+  /**
+   * This will be triggered only if push payload will be missing notification property
+   */
+  messaging.setBackgroundMessageHandler((ev) => {
+    console.log('[PushapeJS - SW] Handling background message', ev);
+    showMessage(ev);
+  });
+} else {
+  console.warn('[PushapeJS - SW] Firebase messaging does not supported');
+}
 
 self.addEventListener('push', function (event) {
   console.log('[PushapeJS - SW] Receive push event', event);

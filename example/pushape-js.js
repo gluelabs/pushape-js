@@ -3486,7 +3486,7 @@ function initializeFirebase(options) {
 }
 exports.initializeFirebase = initializeFirebase;
 function initializeFirebaseServiveWorker(firebaseApp, pushEventCb, swPathName) {
-    if (pushEventCb === void 0) { pushEventCb = function (_) { return undefined; }; }
+    if (pushEventCb === void 0) { pushEventCb = function (_) { }; }
     if (swPathName === void 0) { swPathName = 'firebase-messaging-sw.js'; }
     return __awaiter(this, void 0, void 0, function () {
         var registration, e_1;
@@ -3500,14 +3500,16 @@ function initializeFirebaseServiveWorker(firebaseApp, pushEventCb, swPathName) {
                     return [4 /*yield*/, navigator.serviceWorker.register(swPathName)];
                 case 2:
                     registration = _a.sent();
-                    if (!app_1.default.messaging.isSupported()) {
-                        throw new Error('[PushapeJS] Firebase messagign not supported');
+                    if (app_1.default.messaging.isSupported()) {
+                        firebaseApp.messaging().useServiceWorker(registration);
+                        registration.addEventListener('push', function (event) {
+                            console.log('[PushapeJS] Event push', event);
+                            pushEventCb(event);
+                        });
                     }
-                    firebaseApp.messaging().useServiceWorker(registration);
-                    registration.addEventListener('push', function (event) {
-                        console.log('[PushapeJS] Event push', event);
-                        pushEventCb(event);
-                    });
+                    else {
+                        console.warn('[PushapeJS] Firebase messaging not supported');
+                    }
                     return [2 /*return*/, registration];
                 case 3:
                     e_1 = _a.sent();
@@ -3523,7 +3525,7 @@ exports.initializeFirebaseServiveWorker = initializeFirebaseServiveWorker;
 function initializeSwListeners(registration, notificationclickEventCb, 
 /** If set the show notification function not will be triggered */
 pushapeEventCb) {
-    if (notificationclickEventCb === void 0) { notificationclickEventCb = function (_) { return undefined; }; }
+    if (notificationclickEventCb === void 0) { notificationclickEventCb = function (_) { }; }
     navigator.serviceWorker.addEventListener('message', function (msg) {
         if (msg.data.event === 'pushape') {
             console.log('[PushapeJS] Event pushape \n', msg.data);
@@ -3638,7 +3640,7 @@ function checkSafariRemotePermission(websiteUrl) {
                     untypedWindow = window;
                     // TODO: Too much long and maybe not necessary
                     if (!untypedWindow.safari && !untypedWindow.safari.pushNotification && untypedWindow.safari.pushNotification.permission) {
-                        return [2 /*return*/, false];
+                        return [2 /*return*/, undefined];
                     }
                     permissionData = untypedWindow.safari.pushNotification.permission(websiteUrl);
                     if (!(permissionData.permission === 'default')) return [3 /*break*/, 2];
@@ -3648,7 +3650,7 @@ function checkSafariRemotePermission(websiteUrl) {
                         {}, // Data that you choose to send to your server to help you identify the user.
                         function () {
                             // TODO: Why? computeteSafariResponse(e);
-                            return false;
+                            return computeteSafariResponse(permissionData);
                         })];
                 case 1:
                     // This is a new web service URL and its validity is unknown.
@@ -4982,8 +4984,8 @@ var permission_utils_1 = __webpack_require__(7);
 function initPushape(pushapeOptions, firebaseOptions, websiteUrl, pushEventCb, notificationclickEventCb, 
 /** If set the show notification function not will be triggered. */
 pushapeEventCb, swPathName) {
-    if (pushEventCb === void 0) { pushEventCb = function (_) { return undefined; }; }
-    if (notificationclickEventCb === void 0) { notificationclickEventCb = function (_) { return undefined; }; }
+    if (pushEventCb === void 0) { pushEventCb = function (_) { }; }
+    if (notificationclickEventCb === void 0) { notificationclickEventCb = function (_) { }; }
     return __awaiter(this, void 0, void 0, function () {
         var firebaseApp, swRegistration, token, e_1;
         return __generator(this, function (_a) {

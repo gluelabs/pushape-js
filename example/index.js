@@ -20,29 +20,59 @@ PushapeJS.initializeFirebaseServiveWorker(firebaseApp)
 
   console.log('[PushapeJS - Example] Firebase service worker initialize', registration);
 
-    return PushapeJS.askForPermissions(firebaseApp, 'web.it.on2off.coupon');
+    return askForPermissions();
   })
   .then((t) => {
     token = t;
-    console.log('[PushapeJS - Example] Ask for permission complete', token);
+    console.log('[PushapeJS - Example] Permission successfully granted', token);
 
     PushapeJS.initializeSwListeners(registration);
 
     console.log('[PushapeJS - Example] Initialize service worker listeners complete');
 
-    PushapeJS.initSimplePushape(
-      {
-        id_app: '1162',
-        uuid,
-        internal_id: 'test-paolo',
-      },
-      token,
-    );
+    return registerPushape();
   })
   .then(() => {
-
+    console.log('[PushapeJS - Example] Pushape successfully registered');
   })
   .catch((e) => {
     console.warn('[PushapeJS - Example] Failed to load example \n', e);
 });
 
+function askForPermissions() {
+  console.log('[PushapeJS - Example] Asking for permissions');
+
+  return PushapeJS.askForPermissions(firebaseApp, 'web.it.on2off.coupon')
+    .then(
+      (t) => {
+        token = t;
+
+        console.log('[PushapeJS - Example] Permission successfully granted \n', token);
+
+        return t;
+      },
+      (e) => {
+        console.warn('[PushapeJS - Example] Failed grant permission \n', e);
+      }
+    );
+}
+
+function registerPushape() {
+  console.log('[PushapeJS - Example] Registering Pushape');
+
+  return PushapeJS.initSimplePushape(
+    {
+      id_app: '1162',
+      uuid,
+      internal_id: 'test-paolo',
+    },
+    token,
+  ).then(
+    () => {
+      console.log('[PushapeJS - Example] Pushape successfully registered');
+    },
+    (e) => {
+      console.warn('[PushapeJS - Example] Failed to register pushape service \n', e);
+    }
+  );
+}

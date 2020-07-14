@@ -13,10 +13,10 @@ export async function initPushape(
   pushapeOptions: InitPushapeOptions,
   firebaseOptions: InitFirebaseOptions,
   websiteUrl: string,
-  pushEventCb = (_: Event) => undefined,
-  notificationclickEventCb = (_: MessageEvent) => undefined,
+  pushEventCb = (_: Event) => {},
+  notificationclickEventCb = (_: MessageEvent) => {},
   /** If set the show notification function not will be triggered. */
-  pushapeEventCb?: (_: MessageEvent) => undefined,
+  pushapeEventCb?: (_: MessageEvent) => {},
   swPathName?: string,
 ) {
   const firebaseApp = initializeFirebase(firebaseOptions);
