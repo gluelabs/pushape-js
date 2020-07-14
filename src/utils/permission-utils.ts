@@ -19,7 +19,7 @@ async function checkSafariRemotePermission(websiteUrl: string) {
 
   // TODO: Too much long and maybe not necessary
   if (!untypedWindow.safari && !untypedWindow.safari.pushNotification && untypedWindow.safari.pushNotification.permission) {
-    return false;
+    return undefined;
   }
 
   const permissionData = untypedWindow.safari.pushNotification.permission(websiteUrl); // web.it.on2off.coupon
@@ -32,7 +32,7 @@ async function checkSafariRemotePermission(websiteUrl: string) {
       {}, // Data that you choose to send to your server to help you identify the user.
       () => {
         // TODO: Why? computeteSafariResponse(e);
-        return false;
+        return computeteSafariResponse(permissionData);
       }
     );
   }
