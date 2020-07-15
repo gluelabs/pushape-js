@@ -24,6 +24,9 @@ git checkout -b $releaseBranch $devBranch
 # commit version number increment
 git commit -am "build: release $versionLabel"
 
+# create tag for new version from -master
+git tag $versionLabel
+
 npm run changelog
 
 # merge release branch with the new version number into master
