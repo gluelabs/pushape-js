@@ -1,5 +1,5 @@
-<a name="0.0.6"></a>
-## 0.0.6 (2020-07-15)
+<a name="0.0.7"></a>
+## [0.0.7](https://github.com/gluelabs/pushape-js/compare/397a1ef...0.0.7) (2020-07-15)
 
 
 ### Bug Fixes
