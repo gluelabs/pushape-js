@@ -1,3 +1,13 @@
+<a name="0.0.8"></a>
+## [0.0.8](https://github.com/gluelabs/pushape-js/compare/0.0.7...0.0.8) (2020-07-15)
+
+
+### Bug Fixes
+
+* insert firebase and browser detect as dev dep ([10c16f6](https://github.com/gluelabs/pushape-js/commit/10c16f6))
+
+
+
 <a name="0.0.7"></a>
 ## [0.0.7](https://github.com/gluelabs/pushape-js/compare/397a1ef...0.0.7) (2020-07-15)
 
