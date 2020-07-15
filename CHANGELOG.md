@@ -1,5 +1,5 @@
-<a name="0.0.5"></a>
-## 0.0.5 (2020-07-14)
+<a name="0.0.6"></a>
+## 0.0.6 (2020-07-15)
 
 
 ### Bug Fixes
@@ -9,8 +9,10 @@
 * avoid to return false on check permission ([5d1fece](https://github.com/gluelabs/pushape-js/commit/5d1fece))
 * check messaging support in SW ([80680fc](https://github.com/gluelabs/pushape-js/commit/80680fc))
 * improve lib build tools ([aa11d88](https://github.com/gluelabs/pushape-js/commit/aa11d88))
+* missing update package.json version ([bc082ae](https://github.com/gluelabs/pushape-js/commit/bc082ae))
 * move dependencies into peerDeependecies ([c818571](https://github.com/gluelabs/pushape-js/commit/c818571))
 * wrong return type for event callback in firebase listeners ([0bfdbdc](https://github.com/gluelabs/pushape-js/commit/0bfdbdc))
+* wrong use of shx with sh ([efc6243](https://github.com/gluelabs/pushape-js/commit/efc6243))
 
 
 ### Features

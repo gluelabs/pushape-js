@@ -6,6 +6,11 @@ branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
 # patch, minor, major
 versionLabel=$1
 
+if [ -z "$versionLabel" ]; then
+  echo "error: no version provided"
+  exit
+fi
+
 # establish branch and tag name variables
 devBranch=develop
 masterBranch=master
