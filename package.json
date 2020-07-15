@@ -13,7 +13,7 @@
     "changelog": "node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md && git commit -m 'docs(changelog): add new log'",
     "prepare": "npm run build",
     "postversion": "git push && git push --tags",
-    "release": "shx sh ./scripts/release.sh"
+    "release": "sh ./scripts/release.sh"
   },
   "repository": {
     "type": "git",
