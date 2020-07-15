@@ -1349,7 +1349,7 @@ var ErrorFactory = /** @class */ (function () {
 function replaceTemplate(template, data) {
     return template.replace(PATTERN, function (_, key) {
         var value = data[key];
-        return value != null ? value.toString() : "<" + key + "?>";
+        return value != null ? String(value) : "<" + key + "?>";
     });
 }
 var PATTERN = /\{\$([^}]+)}/g;
@@ -2370,7 +2370,7 @@ var ERRORS = (_a = {},
 var ERROR_FACTORY = new util.ErrorFactory('app', 'Firebase', ERRORS);
 
 var name$1 = "@firebase/app";
-var version = "0.6.6";
+var version = "0.6.8";
 
 var name$2 = "@firebase/analytics";
 
@@ -2503,7 +2503,7 @@ var FirebaseAppImpl = /** @class */ (function () {
             this.checkDestroyed_();
             this.automaticDataCollectionEnabled_ = val;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(FirebaseAppImpl.prototype, "name", {
@@ -2511,7 +2511,7 @@ var FirebaseAppImpl = /** @class */ (function () {
             this.checkDestroyed_();
             return this.name_;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(FirebaseAppImpl.prototype, "options", {
@@ -2519,7 +2519,7 @@ var FirebaseAppImpl = /** @class */ (function () {
             this.checkDestroyed_();
             return this.options_;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     FirebaseAppImpl.prototype.delete = function () {
@@ -2604,7 +2604,7 @@ var FirebaseAppImpl = /** @class */ (function () {
     FirebaseAppImpl.prototype.delete ||
     console.log('dc');
 
-var version$1 = "7.15.2";
+var version$1 = "7.16.0";
 
 /**
  * @license
@@ -4566,7 +4566,7 @@ var Logger = /** @class */ (function () {
             }
             this._logLevel = val;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     // Workaround for setter/getter having to be the same type.
@@ -4583,7 +4583,7 @@ var Logger = /** @class */ (function () {
             }
             this._logHandler = val;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Logger.prototype, "userLogHandler", {
@@ -4593,7 +4593,7 @@ var Logger = /** @class */ (function () {
         set: function (val) {
             this._userLogHandler = val;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     /**
@@ -4719,7 +4719,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var firebase = _interopDefault(__webpack_require__(3));
 
 var name = "firebase";
-var version = "7.15.4";
+var version = "7.16.0";
 
 /**
  * @license
@@ -5077,7 +5077,7 @@ var idb = __webpack_require__(1);
 
 
 var index_esm_name = "@firebase/installations";
-var version = "0.4.12";
+var version = "0.4.14";
 
 /**
  * @license
@@ -6511,6 +6511,56 @@ function index_esm_getMissingValueError(valueName) {
 
 /**
  * @license
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+var DEFAULT_SW_PATH = '/firebase-messaging-sw.js';
+var DEFAULT_SW_SCOPE = '/firebase-cloud-messaging-push-scope';
+var DEFAULT_VAPID_KEY = 'BDOU99-h67HcA6JeFXHbSNMu7e2yNNu3RzoMj8TM4W88jITfq7ZmPvIM1Iv-4_l2LxQcYwhqby2xGpWwzjfAnG4';
+var ENDPOINT = 'https://fcmregistrations.googleapis.com/v1';
+/** Key of FCM Payload in Notification's data field. */
+var FCM_MSG = 'FCM_MSG';
+var CONSOLE_CAMPAIGN_ID = 'google.c.a.c_id';
+var CONSOLE_CAMPAIGN_NAME = 'google.c.a.c_l';
+var CONSOLE_CAMPAIGN_TIME = 'google.c.a.ts';
+/** Set to '1' if Analytics is enabled for the campaign */
+var CONSOLE_CAMPAIGN_ANALYTICS_ENABLED = 'google.c.a.e';
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+var MessageType;
+(function (MessageType) {
+    MessageType["PUSH_RECEIVED"] = "push-received";
+    MessageType["NOTIFICATION_CLICKED"] = "notification-clicked";
+})(MessageType || (MessageType = {}));
+
+/**
+ * @license
  * Copyright 2017 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -6840,34 +6890,6 @@ function index_esm_getKey(_a) {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var DEFAULT_SW_PATH = '/firebase-messaging-sw.js';
-var DEFAULT_SW_SCOPE = '/firebase-cloud-messaging-push-scope';
-var DEFAULT_VAPID_KEY = 'BDOU99-h67HcA6JeFXHbSNMu7e2yNNu3RzoMj8TM4W88jITfq7ZmPvIM1Iv-4_l2LxQcYwhqby2xGpWwzjfAnG4';
-var ENDPOINT = 'https://fcmregistrations.googleapis.com/v1';
-/** Key of FCM Payload in Notification's data field. */
-var FCM_MSG = 'FCM_MSG';
-var CONSOLE_CAMPAIGN_ID = 'google.c.a.c_id';
-var CONSOLE_CAMPAIGN_NAME = 'google.c.a.c_l';
-var CONSOLE_CAMPAIGN_TIME = 'google.c.a.ts';
-/** Set to '1' if Analytics is enabled for the campaign */
-var CONSOLE_CAMPAIGN_ANALYTICS_ENABLED = 'google.c.a.e';
-
-/**
- * @license
- * Copyright 2019 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 function requestGetToken(firebaseDependencies, subscriptionOptions) {
     return Object(tslib_es6["__awaiter"])(this, void 0, void 0, function () {
         var headers, body, subscribeOptions, responseData, response, err_1, message;
@@ -7150,7 +7172,7 @@ function updateToken(tokenDetails, firebaseDependencies, swRegistration) {
                     return [4 /*yield*/, requestUpdateToken(firebaseDependencies, tokenDetails)];
                 case 1:
                     updatedToken = _a.sent();
-                    updatedTokenDetails = Object(tslib_es6["__assign"])({ token: updatedToken, createTime: Date.now() }, tokenDetails);
+                    updatedTokenDetails = Object(tslib_es6["__assign"])(Object(tslib_es6["__assign"])({}, tokenDetails), { token: updatedToken, createTime: Date.now() });
                     return [4 /*yield*/, dbSet(firebaseDependencies, updatedTokenDetails)];
                 case 2:
                     _a.sent();
@@ -7224,28 +7246,6 @@ function isTokenValid(dbOptions, currentOptions) {
 
 /**
  * @license
- * Copyright 2017 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-var MessageType;
-(function (MessageType) {
-    MessageType["PUSH_RECEIVED"] = "push-received";
-    MessageType["NOTIFICATION_CLICKED"] = "notification-clicked";
-})(MessageType || (MessageType = {}));
-
-/**
- * @license
  * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -7296,7 +7296,7 @@ var index_esm_WindowController = /** @class */ (function () {
         get: function () {
             return this.firebaseDependencies.app;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     WindowController.prototype.getToken = function () {
@@ -7397,13 +7397,9 @@ var index_esm_WindowController = /** @class */ (function () {
      * message.
      * @return The unsubscribe function for the observer.
      */
-    // TODO: Simplify this to only accept a function and not an Observer.
     WindowController.prototype.onMessage = function (nextOrObserver) {
         var _this = this;
-        this.onMessageCallback =
-            typeof nextOrObserver === 'function'
-                ? nextOrObserver
-                : nextOrObserver.next;
+        this.onMessageCallback = nextOrObserver;
         return function () {
             _this.onMessageCallback = null;
         };
@@ -7465,8 +7461,14 @@ var index_esm_WindowController = /** @class */ (function () {
                             return [2 /*return*/];
                         }
                         _b = event.data.firebaseMessaging, type = _b.type, payload = _b.payload;
+                        // onMessageCallback is either a function or observer/subscriber.
                         if (this.onMessageCallback && type === MessageType.PUSH_RECEIVED) {
-                            this.onMessageCallback(payload);
+                            if (typeof this.onMessageCallback === 'function') {
+                                this.onMessageCallback(payload);
+                            }
+                            else {
+                                this.onMessageCallback.next(payload);
+                            }
                         }
                         data = payload.data;
                         if (!(isConsoleMessage(data) &&
@@ -7577,7 +7579,7 @@ var index_esm_SwController = /** @class */ (function () {
         get: function () {
             return this.firebaseDependencies.app;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     /**
