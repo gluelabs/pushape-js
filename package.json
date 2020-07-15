@@ -12,7 +12,8 @@
     "commit": "git-cz",
     "changelog": "node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md && git commit -m 'docs(changelog): add new log'",
     "prepare": "npm run build",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "release": "shx sh ./scripts/release.sh"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,7 @@
     "gulp": "^4.0.2",
     "gulp-delete-file": "^1.0.2",
     "husky": "^2.5.0",
+    "json": "^9.0.6",
     "require-dir": "^1.2.0",
     "shx": "^0.3.2",
     "typescript": "^3.9.5",
