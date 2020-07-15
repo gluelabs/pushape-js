@@ -14,6 +14,8 @@ releaseBranch=release/$versionLabel
 # create the release branch from the -develop branch
 git checkout -b $releaseBranch $devBranch
 
+./node_modules/.bin/json -I -f package.json -e "this.version=\"$versionLabel\""
+
 # commit version number increment
 git commit -am "build: release $versionLabel"
 
