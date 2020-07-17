@@ -47,7 +47,8 @@ export async function initSimplePushape(
     pushapeOptions.regid = token || pushapeOptions.regid;
     pushapeOptions.platform = pushapeOptions.platform || browserDetect().name || 'not-found';
 
-    return await registerApiPushape(pushapeOptions);
+    const pushapeResponse = await registerApiPushape(pushapeOptions);
+    return { pushapeOptions, pushapeResponse };
   } catch (e) {
     console.error(e);
 
