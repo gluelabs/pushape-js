@@ -1,6 +1,6 @@
 {
   "name": "pushape-js",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Library to integrate Pushape back end in a website",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

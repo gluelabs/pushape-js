@@ -6,7 +6,7 @@ import { InitPushapeOptions } from '../definitions/pushape';
 import { InitFirebaseOptions } from '../definitions/firebase-internal';
 
 import { initializeFirebase, initializeFirebaseServiveWorker, initializeSwListeners } from '../utils/firebase-utils';
-import { askForPermissions } from '../utils/permission-utils';
+import { askForNotificationPermission } from '../utils/permission-utils';
 
 
 export async function initPushape(
@@ -23,14 +23,14 @@ export async function initPushape(
 
   try {
     const swRegistration = await initializeFirebaseServiveWorker(firebaseApp, pushEventCb, swPathName);
-    const token = await askForPermissions(firebaseApp, websiteUrl);
+    const token = await askForNotificationPermission(firebaseApp, websiteUrl);
 
     initializeSwListeners(swRegistration, notificationclickEventCb, pushapeEventCb);
 
     pushapeOptions.regid = token as string; // FIXME: Wrong return type from askPermissions
     pushapeOptions.platform = pushapeOptions.platform || browserDetect().name || 'not-found';
 
-    await registerApiPushape(pushapeOptions);
+    return await registerApiPushape(pushapeOptions);
   } catch (e) {
     console.error(e);
 
@@ -47,7 +47,8 @@ export async function initSimplePushape(
     pushapeOptions.regid = token || pushapeOptions.regid;
     pushapeOptions.platform = pushapeOptions.platform || browserDetect().name || 'not-found';
 
-    await registerApiPushape(pushapeOptions);
+    const pushapeResponse = await registerApiPushape(pushapeOptions);
+    return { pushapeOptions, pushapeResponse };
   } catch (e) {
     console.error(e);
 

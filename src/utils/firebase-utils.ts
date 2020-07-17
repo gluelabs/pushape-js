@@ -58,6 +58,7 @@ export function initializeSwListeners(
   notificationclickEventCb = (_: MessageEvent) => {},
   /** If set the show notification function not will be triggered */
   pushapeEventCb?: (_: MessageEvent) => {},
+  genericEventCb?: (_: MessageEvent) => {},
 ) {
   navigator.serviceWorker.addEventListener('message', (msg: MessageEvent) => {
     if (msg.data.event === 'pushape') {
@@ -72,9 +73,15 @@ export function initializeSwListeners(
     } else if (msg.data.event === 'notificationclick') {
       console.log('[PushapeJS] Event notificationclick \n', msg.data);
 
-      notificationclickEventCb(msg);
+      if (notificationclickEventCb) {
+        notificationclickEventCb(msg);
+      }
     } else {
-      console.warn('[PushapeJS] Unhandled Event \n', msg);
+      console.log('[PushapeJS] Generic event \n', msg);
+
+      if (genericEventCb) {
+        genericEventCb(msg);
+      }
     }
   });
 }

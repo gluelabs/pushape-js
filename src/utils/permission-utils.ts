@@ -1,7 +1,20 @@
 import browserDetect from 'browser-detect';
 import firbase from 'firebase/app';
 
-export async function askForPermissions(firebaseApp: firbase.app.App, websiteUrl: string) {
+export function hasNotificationPermission() {
+  const permission = getNotificationPermission();
+  return permission === 'granted';
+}
+
+export function getNotificationPermission() {
+  if (!('Notification' in window)) {
+    throw new Error('[PushapeJS] This browser does not support desktop notification');
+  }
+
+  return Notification.permission;
+}
+
+export async function askForNotificationPermission(firebaseApp: firbase.app.App, websiteUrl: string) {
   const browser = browserDetect().name;
 
   if (browser === 'safari') {

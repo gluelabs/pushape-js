@@ -1,8 +1,12 @@
-import { InitPushapeOptions, RemovePushapeOptions } from '../definitions/pushape';
+import { InitPushapeOptions, RemovePushapeOptions, InitPushapeResponse } from '../definitions/pushape';
 
 const pushapeUrl = 'https://gluepushape.appspot.com';
 
-export async function registerApiPushape(options: InitPushapeOptions, retryOnError = false, retryAfter = 5000) {
+export async function registerApiPushape(
+  options: InitPushapeOptions,
+  retryOnError = false,
+  retryAfter = 5000,
+): Promise<InitPushapeResponse | undefined> {
   const url = `${pushapeUrl}/subscribe`;
 
   try {
@@ -15,7 +19,7 @@ export async function registerApiPushape(options: InitPushapeOptions, retryOnErr
           'Content-Type': 'application/json',
         }),
         body: JSON.stringify(options),
-      });
+      }).then((response) => response.json());
   } catch (e) {
     if (retryOnError) {
       setTimeout(() => registerApiPushape(options, retryOnError, retryAfter), retryAfter);

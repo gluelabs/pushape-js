@@ -11,3 +11,8 @@ export interface RemovePushapeOptions {
   platform: string;
   uuid: string;
 }
+
+export interface InitPushapeResponse {
+  push_id: string;
+  status: number;
+}
