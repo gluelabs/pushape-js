@@ -1,3 +1,16 @@
+<a name="0.0.9"></a>
+## [0.0.9](https://github.com/gluelabs/pushape-js/compare/0.0.8...0.0.9) (2020-07-17)
+
+
+### Features
+
+* **example:** re think flow ([514bde6](https://github.com/gluelabs/pushape-js/commit/514bde6))
+* improve permissions utils ([ea95d85](https://github.com/gluelabs/pushape-js/commit/ea95d85))
+* introduce generic callback for unhandled event ([33100b2](https://github.com/gluelabs/pushape-js/commit/33100b2))
+* introduce pushape response model ([4ca8921](https://github.com/gluelabs/pushape-js/commit/4ca8921))
+
+
+
 <a name="0.0.8"></a>
 ## [0.0.8](https://github.com/gluelabs/pushape-js/compare/0.0.7...0.0.8) (2020-07-15)
 
