@@ -3393,7 +3393,7 @@ function registerApiPushape(options, retryOnError, retryAfter) {
                                 'Content-Type': 'application/json',
                             }),
                             body: JSON.stringify(options),
-                        })];
+                        }).then(function (response) { return response.json(); })];
                 case 2: return [2 /*return*/, _a.sent()];
                 case 3:
                     e_1 = _a.sent();
@@ -3524,7 +3524,7 @@ function initializeFirebaseServiveWorker(firebaseApp, pushEventCb, swPathName) {
 exports.initializeFirebaseServiveWorker = initializeFirebaseServiveWorker;
 function initializeSwListeners(registration, notificationclickEventCb, 
 /** If set the show notification function not will be triggered */
-pushapeEventCb) {
+pushapeEventCb, genericEventCb) {
     if (notificationclickEventCb === void 0) { notificationclickEventCb = function (_) { }; }
     navigator.serviceWorker.addEventListener('message', function (msg) {
         if (msg.data.event === 'pushape') {
@@ -3538,10 +3538,15 @@ pushapeEventCb) {
         }
         else if (msg.data.event === 'notificationclick') {
             console.log('[PushapeJS] Event notificationclick \n', msg.data);
-            notificationclickEventCb(msg);
+            if (notificationclickEventCb) {
+                notificationclickEventCb(msg);
+            }
         }
         else {
-            console.warn('[PushapeJS] Unhandled Event \n', msg);
+            console.log('[PushapeJS] Generic event \n', msg);
+            if (genericEventCb) {
+                genericEventCb(msg);
+            }
         }
     });
 }
@@ -3609,9 +3614,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.askForPermissions = void 0;
+exports.askForNotificationPermission = exports.getNotificationPermission = exports.hasNotificationPermission = void 0;
 var browser_detect_1 = __webpack_require__(8);
-function askForPermissions(firebaseApp, websiteUrl) {
+function hasNotificationPermission() {
+    var permission = getNotificationPermission();
+    return permission === 'granted';
+}
+exports.hasNotificationPermission = hasNotificationPermission;
+function getNotificationPermission() {
+    if (!('Notification' in window)) {
+        throw new Error('[PushapeJS] This browser does not support desktop notification');
+    }
+    return Notification.permission;
+}
+exports.getNotificationPermission = getNotificationPermission;
+function askForNotificationPermission(firebaseApp, websiteUrl) {
     return __awaiter(this, void 0, void 0, function () {
         var browser, message, token;
         return __generator(this, function (_a) {
@@ -3630,7 +3647,7 @@ function askForPermissions(firebaseApp, websiteUrl) {
         });
     });
 }
-exports.askForPermissions = askForPermissions;
+exports.askForNotificationPermission = askForNotificationPermission;
 function checkSafariRemotePermission(websiteUrl) {
     return __awaiter(this, void 0, void 0, function () {
         var untypedWindow, permissionData;
@@ -4998,16 +5015,14 @@ pushapeEventCb, swPathName) {
                     return [4 /*yield*/, firebase_utils_1.initializeFirebaseServiveWorker(firebaseApp, pushEventCb, swPathName)];
                 case 2:
                     swRegistration = _a.sent();
-                    return [4 /*yield*/, permission_utils_1.askForPermissions(firebaseApp, websiteUrl)];
+                    return [4 /*yield*/, permission_utils_1.askForNotificationPermission(firebaseApp, websiteUrl)];
                 case 3:
                     token = _a.sent();
                     firebase_utils_1.initializeSwListeners(swRegistration, notificationclickEventCb, pushapeEventCb);
                     pushapeOptions.regid = token; // FIXME: Wrong return type from askPermissions
                     pushapeOptions.platform = pushapeOptions.platform || browser_detect_1.default().name || 'not-found';
                     return [4 /*yield*/, pushape_api_1.registerApiPushape(pushapeOptions)];
-                case 4:
-                    _a.sent();
-                    return [3 /*break*/, 6];
+                case 4: return [2 /*return*/, _a.sent()];
                 case 5:
                     e_1 = _a.sent();
                     console.error(e_1);
@@ -5021,7 +5036,7 @@ pushapeEventCb, swPathName) {
 exports.initPushape = initPushape;
 function initSimplePushape(pushapeOptions, token) {
     return __awaiter(this, void 0, void 0, function () {
-        var e_2;
+        var pushapeResponse, e_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -5030,8 +5045,8 @@ function initSimplePushape(pushapeOptions, token) {
                     pushapeOptions.platform = pushapeOptions.platform || browser_detect_1.default().name || 'not-found';
                     return [4 /*yield*/, pushape_api_1.registerApiPushape(pushapeOptions)];
                 case 1:
-                    _a.sent();
-                    return [3 /*break*/, 3];
+                    pushapeResponse = _a.sent();
+                    return [2 /*return*/, { pushapeOptions: pushapeOptions, pushapeResponse: pushapeResponse }];
                 case 2:
                     e_2 = _a.sent();
                     console.error(e_2);

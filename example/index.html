@@ -1,17 +1,116 @@
 <html>
   <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   </head>
-  <body>
-    <h1>PushapeJS Test app</h1>
+  <style>
+    #push-token {
+      overflow-wrap: anywhere;
+    }
+    #notification-info, #notification-btn {
+      display: none;
+    }
+  </style>
 
-    <button onclick="askForPermissions()">Enable notification</button>
+  <body class="container">
+    <h1>PushapeJS - Test app</h1>
+
+    <div
+      id="notification-info"
+      class="alert alert-success w-100">
+      Notifications are enable
+    </div>
+
+    <section>
+      <h2>Flow</h2>
+      <p>On page load</p>
+      <ul>
+        <li>Initialize firebase app</li>
+        <li>
+          If notifications are allow: initialize firebase service worker
+        </li>
+      </ul>
+      <p>
+        On "Enable notification" click (if notifications are not enable)
+      </p>
+      <ul>
+        <li>Check permissions and ask for them</li>
+        <li>
+          Register to Pushape service if "pushape-id" is not set
+        </li>
+      </ul>
+      <p>On "Unregister Pushape"</p>
+      <ul>
+        <li>Unregister from Pushape service</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Info</h2>
+      <p>
+        UUID:
+        <strong>
+          <span id="uuid">No device token found</span>
+        </strong>
+      </p>
+      <p>
+        Push token:
+        <strong>
+          <span id="push-token">No push token found</span>
+        </strong>
+      </p>
+      <p>
+        Pushape id:
+        <strong>
+          <span id="pushape-id">No pushape id found</span>
+        </strong>
+      </p>
+      <p>
+        Internal id:
+        <strong>
+          <span id="internal-id">No internal id generated</span>
+        </strong>
+      </p>
+      <p>
+        App id:
+        <strong>
+          <span id="app-id"></span>
+        </strong>
+      </p>
+
+      <div class="d-flex mb-2">
+        <button
+          id="notification-btn"
+          class="btn btn-primary mr-2"
+          type="button"
+          onclick="askForPermissions()">
+          Enable notification
+        </button>
+      </div>
+
+      <div class="d-flex">
+        <button
+          id="unregister-btn"
+          class="btn btn-outline-secondary mr-2"
+          type="button"
+          onclick="unregisterPushape()">
+          Unregister Pushape
+        </button>
+        <button
+          id="register-btn"
+          class="btn btn-outline-primary"
+          type="button"
+          onclick="unregisterPushape()">
+          Register Pushape
+        </button>
+      </div>
+    </section>
 
     <!-- External dependencies -->
-    <script async src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.2.0/uuidv4.min.js"></script>
-    <script async src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.2.0/uuidv4.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
     <!-- Internal dependencies -->
-    <script async src="pushape-js.js"></script>
+    <script src="pushape-js.js"></script>
     <!-- Main -->
-    <script async src="index.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
