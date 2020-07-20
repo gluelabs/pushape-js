@@ -10,11 +10,11 @@ const internalIdElement = document.getElementById('internal-id');
 const appIdElement = document.getElementById('app-id');
 
 const firebaseApp = PushapeJS.initializeFirebase({
-  appId: '1:551879783619:web:5388f6b74da513cbcb1e76',
-  apiKey: 'AIzaSyBJyQPodo-7J3X1TTLTfumP0lO__gPfBGo',
-  authDomain: 'on2off-dealer.web.app',
-  projectId: 'on2off-glue',
-  messagingSenderId: '551879783619',
+  appId: '<appId>',
+  apiKey: '<apiKey>',
+  authDomain: '<authDomain>',
+  projectId: '<firebaseProjectId>',
+  messagingSenderId: '<senderId>',
 });
 
 console.log('[PushapeJS - Example] Firebase app initialize', firebaseApp);
