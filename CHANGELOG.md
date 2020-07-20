@@ -1,3 +1,13 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/gluelabs/pushape-js/compare/0.0.9...1.0.0) (2020-07-20)
+
+
+### Bug Fixes
+
+* **example:** wrong function call on register button ([9416369](https://github.com/gluelabs/pushape-js/commit/9416369))
+
+
+
 <a name="0.0.9"></a>
 ## [0.0.9](https://github.com/gluelabs/pushape-js/compare/0.0.8...0.0.9) (2020-07-17)
 
