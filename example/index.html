@@ -21,7 +21,19 @@
     </div>
 
     <section>
-      <h2>Flow</h2>
+      <h2>Library Flow</h2>
+      <ul>
+        <li>Initialize firebase app with `initializeFirebase` function</li>
+        <li>Initialize firebase service worker with `initializeFirebaseServiveWorker` function</li>
+        <li>Check notification permission with `hasNotificationPermission` function</li>
+        <li>If notifications are not allow ask for them, obtain and save **token** to send in Pushape API subscribe</li>
+        <li>Prepare service workers listerners with `initializeSwListeners`</li>
+        <li>Register to Pushape with `PushapeJS.initSimplePushape`</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Example Flow</h2>
       <p>On page load</p>
       <ul>
         <li>Initialize firebase app</li>
@@ -42,6 +54,10 @@
       <ul>
         <li>Unregister from Pushape service</li>
       </ul>
+      <p>On "Register Pushape"</p>
+      <ul>
+        <li>Register to Pushape service</li>
+      </ul>
     </section>
 
     <section>
@@ -50,12 +66,6 @@
         UUID:
         <strong>
           <span id="uuid">No device token found</span>
-        </strong>
-      </p>
-      <p>
-        Push token:
-        <strong>
-          <span id="push-token">No push token found</span>
         </strong>
       </p>
       <p>
@@ -99,7 +109,7 @@
           id="register-btn"
           class="btn btn-outline-primary"
           type="button"
-          onclick="unregisterPushape()">
+          onclick="registerPushape()">
           Register Pushape
         </button>
       </div>
