@@ -1,3 +1,13 @@
+<a name="1.0.2"></a>
+## [1.0.2](https://github.com/gluelabs/pushape-js/compare/1.0.1...1.0.2) (2020-07-20)
+
+
+### Bug Fixes
+
+* wrong return type from callback event ([f04779b](https://github.com/gluelabs/pushape-js/commit/f04779b))
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/gluelabs/pushape-js/compare/1.0.0...1.0.1) (2020-07-20)
 
