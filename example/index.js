@@ -5,7 +5,6 @@ const PUSHAPE_ID_KEY = 'pushapejs-pushape-id';
 const PLATFORM_KEY = 'pushapejs-platform';
 
 const uuidElement = document.getElementById('uuid');
-const pushElement = document.getElementById('push-token');
 const pushapeElement = document.getElementById('pushape-id');
 const internalIdElement = document.getElementById('internal-id');
 const appIdElement = document.getElementById('app-id');
@@ -81,7 +80,6 @@ function setPushapeId(id) {
 
 function setPushToken(t) {
   pushapeOptions.regid = t
-  pushElement.innerHTML = t || 'No push token found';
 }
 
 function setUUID(uuid) {

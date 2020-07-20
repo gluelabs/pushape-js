@@ -109,9 +109,15 @@ In `index.html`:
 ```HTML
 <html>
   <body>
+    ...
 
+
+    <!-- External dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.2.0/uuidv4.min.js"></script>
-    <script src="./node_modules/pushape-js/pushape-js.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
+    <!-- Internal dependencies -->
+    <script src=./node_modules/pushape-js/pushape-js.js"></script>
+    <!-- Main -->
     <script src="index.js"></script>
   </body>
   </body>
@@ -119,6 +125,8 @@ In `index.html`:
 ```
 
 In `index.js`:
+
+**NOTE: This is a fake example used to show how call functions from the library. Check the example app for a more correct flow.**
 
 ```JS
 const firebaseApp = PushapeJS.initializeFirebase({
@@ -187,12 +195,15 @@ The server key is found in the project settings in the Firebase Console under th
 | Function                          | Context          | Description                                                                                                                      |     |
 | --------------------------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------- | --- |
 | `initializeFirebase`              | Firebase utils   | Initialize firebase app and return it. It requires Firebase's project credentials as show in examples                            |     |
-| `initializeFirebaseServiveWorker` | Firebase utils   | Register service worker in the client and use it in Firebase if supported. Than it allow to listen push event                    |     |
+| `initializeFirebaseServiveWorker` | Firebase utils   | Register service worker in the client and use it in Firebase if supported. Than it allow to listen push event                   
+|     |
 | `initializeSwListeners`           | Firebase utils   |                                                                                                                                  |     |
 | `showNotification`                | Firebase utils   |                                                                                                                                  |     |
-| `askForPermissions`               | Permission utils | Check for user permission about notification and return a token to use in `registerApiPushape` function                          |     |
+| `askForNotificationPermission`               | Permission utils | Check for user permission about notification and return a token to use in `registerApiPushape` function                          |     |
+| `hasNotificationPermission`               | Permission utils | Check if user has permission enable for notification                            
+|     |
 | `registerApiPushape`              | Pushape API      | Subscribe to the Pushape notification center. This allow to receive notifications from Pushape back end                          |     |
-| `unregisterApiPushape`            | Pushape API      | Unsubscribe from Pushape notification center                                                                                     |     |
+| `unregisterApiPushape`            | Pushape API      | Unsubscribe from Pushape notification center                                                                                    |     |
 | `initPushape`                     | Pushape utils    | Wrapper for Firebase initialization process, permssions and Pushape registration. It call each method with in the right sequence |     |
 | `initSimplePushape`               | Pushape utils    | Wrapper for `registerApiPushape` that provide a platform if not set from the consumer                                            |     |
 
