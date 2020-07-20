@@ -7,23 +7,23 @@ importScripts('https://www.gstatic.com/firebasejs/6.0.4/firebase-messaging.js');
 console.log('[PushapeJS - SW] Init');
 
 firebase.initializeApp({
-  appId: '<appId>',
-  apiKey: '<apiKey>',
-  authDomain: '<authDomain>',
-  projectId: '<projectId>',
-  messagingSenderId: '<senderId>',
+  appId: '1:551879783619:web:5388f6b74da513cbcb1e76',
+  apiKey: 'AIzaSyBJyQPodo-7J3X1TTLTfumP0lO__gPfBGo',
+  authDomain: 'on2off-dealer.web.app',
+  projectId: 'on2off-glue',
+  messagingSenderId: '551879783619',
 });
 
 if (firebase.messaging.isSupported()) {
-const messaging = firebase.messaging();
+  const messaging = firebase.messaging();
 
-/**
- * This will be triggered only if push payload will be missing notification property
- */
-messaging.setBackgroundMessageHandler((ev) => {
-  console.log('[PushapeJS - SW] Handling background message', ev);
-  showMessage(ev);
-});
+  /**
+   * This will be triggered only if push payload will be missing notification property
+   */
+  messaging.setBackgroundMessageHandler((ev) => {
+    console.log('[PushapeJS - SW] Handling background message', ev);
+    showMessage(ev);
+  });
 } else {
   console.warn('[PushapeJS - SW] Firebase messaging does not supported');
 }
