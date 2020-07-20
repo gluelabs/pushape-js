@@ -55,10 +55,10 @@ export async function initializeFirebaseServiveWorker(
 
 export function initializeSwListeners(
   registration: ServiceWorkerRegistration,
-  notificationclickEventCb = (_: MessageEvent) => {},
+  notificationclickEventCb?: (_: MessageEvent) => void,
   /** If set the show notification function not will be triggered */
-  pushapeEventCb?: (_: MessageEvent) => {},
-  genericEventCb?: (_: MessageEvent) => {},
+  pushapeEventCb?: (_: MessageEvent) => void,
+  genericEventCb?: (_: MessageEvent) => void,
 ) {
   navigator.serviceWorker.addEventListener('message', (msg: MessageEvent) => {
     if (msg.data.event === 'pushape') {
