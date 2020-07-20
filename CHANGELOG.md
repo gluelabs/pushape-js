@@ -1,3 +1,13 @@
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/gluelabs/pushape-js/compare/1.0.0...1.0.1) (2020-07-20)
+
+
+### Bug Fixes
+
+* remove api keys ([c0e6f22](https://github.com/gluelabs/pushape-js/commit/c0e6f22))
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/gluelabs/pushape-js/compare/0.0.9...1.0.0) (2020-07-20)
 
